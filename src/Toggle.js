@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button } from '@blueprintjs/core'
 
 export default class Toggle extends Component {
   state = {
@@ -16,7 +17,11 @@ export default class Toggle extends Component {
     return (
       <div>
         {this.state.on && this.props.children}
-        <button onClick={this.toggle}>Show/Hide</button>
+        <Button
+          disabled="true"
+          intent="success"
+          large="true"
+          onClick={this.toggle}>Show/Hide</Button>
       </div>
     );
   }

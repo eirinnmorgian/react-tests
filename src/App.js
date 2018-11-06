@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import * as Blueprint from '@blueprintjs/core';
 
 import Toggle from './ToggleRPC';
 import Portal from './portal';
@@ -15,34 +15,53 @@ import Portal from './portal';
 //    text and logic
 
 
-class App extends Component {
-  render() { // render method is always required
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
 
-        <Toggle>
-          {({on, toggle}) => ( 
-            // using render props children
-            // no need to name the props,
-            // auto-accessed as "children"
-            <Fragment>
-              {on && <h1>Show Me</h1>}
-              <button onClick={toggle}>Show/Hide</button>
-              
-              <Portal>
-                {on && <h1>Hi, I'm in a portal!</h1>}
-                {/* portal still has access
-                to all component props! */}
-              </Portal>
-            </Fragment>
-          )}
-        </Toggle> 
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <div className="App">
+
+
+      <Toggle>
+        {({on, toggle}) => ( 
+          // using render props children
+          // no need to name the props,
+          // auto-accessed as "children"
+          <>
+            <Blueprint.Card>
+              <h5>Card Heading</h5>
+              <p>Card content</p>
+              <Blueprint.Button
+                active={false}
+                icon="refresh"
+                className={Blueprint.Classes.BUTTON}
+                type="button"
+                intent="success"
+                large={false}
+                loading={false}
+                minimal={true}
+                onClick={toggle}
+              >
+                Display rest of card
+              </Blueprint.Button>
+              {on && <p>Bonus content</p>}
+
+            </Blueprint.Card>
+ 
+
+
+
+            
+            <Portal>
+              {/* {on && <h1>Hi, I'm in a portal!</h1>} */}
+              {/* portal still has access
+              to all component props! */}
+            </Portal>
+          </>
+        )}
+      </Toggle> 
+    </div>
+  );
 }
+
 
 export default App;
